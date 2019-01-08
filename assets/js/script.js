@@ -9,4 +9,15 @@ var config = {
   };
   firebase.initializeApp(config);
 
-  
+  var database = firebase.database();
+
+  database.ref().on("value", function (snapshot) {
+
+    console.log(snapshot);
+
+  });
+
+$("#submit").click( function (event) {
+
+
+});

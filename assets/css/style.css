@@ -1,0 +1,22 @@
+
+body {
+    background-color: #67677e;
+}
+
+.jumbotron {
+    background-color: #1d1e22;
+    color: #d4d4dc;
+}
+
+h1 {
+    color: #feda6a;
+}
+
+#header-card {
+    background-color: #393f4d;
+    color: #d4d4dc
+}
+
+p {
+    color: #feda6a;
+}

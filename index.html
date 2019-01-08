@@ -15,7 +15,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     
     <!-- css -->
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
 
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
@@ -23,10 +23,111 @@
 </head>
 <body>
     
+    <div class="container">
+
+        <br>
+
+        <!-- title area -->
+        <div class="jumbotron">
+            <h1 class="text-center">Train Scheduler</h1>
+            <h3 class="text-center">Check on trains or add your own!</h3>
+        </div>
+
+        <!-- current trains -->
+        <div class="row">
+            <div class="col-lg-12">
+              <div class="card" id="header-card">
+                <div class="card-header">
+                  <h3 class="text-center">
+                    <strong>Current Trains:</strong></h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- current train table -->
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card" id="timetable-card">
+                <div class="card-body">
+                  <div class="row">
+
+                    <div class="col-sm-1"></div>
+
+                    <div class="col-sm-2" id="train">
+                        <h5>Train Name</h5>
+                        <p>Bipolar Express</p>
+                    </div>
+                    <div class="col-sm-2" id="dest">
+                        <h5>Destination</h5>
+                        <p>Lincoln, NE</p>
+                    </div>
+                    <div class="col-sm-2" id="freq">
+                        <h5>Frequency (min)</h5>
+                        <p>60</p>
+                    </div>
+                    <div class="col-sm-2" id="next">
+                        <h5>Next Arrival</h5>
+                        <p>14:00</p>
+                    </div>
+                    <div class="col-sm-2" id="min">
+                        <h5>Minutes Away</h5>
+                        <p>x</p>
+                    </div>
+
+                    <div class="col-sm-1"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br>
+
+        <!-- new train -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card" id="header-card">
+                    <div class="card-header">
+                        <h3 class="text-center">
+                            <strong>New Train:</strong></h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-10 offset-md-1">
+                                <form>
+                                    <div class="form-group row">
+                                        <label for="train-name">Train Name</label>
+                                        <input class="form-control" id="new-train" type="text">
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="destination">Destination</label>
+                                        <input class="form-control" id="new-dest" type="number">
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="first-train">First Train Time (HHMM)</label>
+                                        <input class="form-control" id="new-time" type="number">
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="frequency">Frequency (min)</label>
+                                        <input class="form-control" id="new-freq" type="number">
+                                    </div>
+                                    <button class="btn btn-primary" id="submit" type="submit">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+    </div>
 
 
 
     <!-- Javascript -->
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
