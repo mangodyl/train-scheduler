@@ -17,7 +17,14 @@ var config = {
 
   });
 
-$("#submit").click( function (event) {
+$("#submit").click(function (event) {
+    event.preventDefault();
 
+    var newTrain = $("#new-train").val().trim();
+    var newDest = $("#new-dest").val().trim();
+    var newTime = parseInt($("#new-time").val().trim());
+    var newFreq = parseInt($("#new-freq").val().trim());
+
+    database.ref();
 
 });
