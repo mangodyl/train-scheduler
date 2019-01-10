@@ -1,11 +1,11 @@
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyC6OcB6cZ3_VMNZcS24sxf1zHUBktnbmDo",
-  authDomain: "train-scheduler-demo.firebaseapp.com",
-  databaseURL: "https://train-scheduler-demo.firebaseio.com",
-  projectId: "train-scheduler-demo",
-  storageBucket: "train-scheduler-demo.appspot.com",
-  messagingSenderId: "1034003993438"
+  apiKey: "AIzaSyDVT_z4sfrvwIkgzWAs1eaG1UOW8lPar8c",
+  authDomain: "train-scheduler-m.firebaseapp.com",
+  databaseURL: "https://train-scheduler-m.firebaseio.com",
+  projectId: "train-scheduler-m",
+  storageBucket: "train-scheduler-m.appspot.com",
+  messagingSenderId: "44735770926"
 };
 firebase.initializeApp(config);
 
@@ -47,11 +47,32 @@ $(document).on("click", '#submit', function (event) {
 
 });
 
+// Calculations go here
+
+// ------------------------------------
 
 // On addition of new value or page load, add new train to table via element creation & firebase read
 
 database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function (snapshot) {
 
   console.log(snapshot);
+
+  var train = $("<p>");
+  var dest = $("<p>");
+  var freq = $("<p>");
+  
+  var next = $("<p>");
+  var till = $("<p>");
+
+  train.text(snapshot.val().trainName);
+  // append to table
+
+  dest.text(snapshot.val().destination);
+  // append to table
+
+  freq.text(snapshot.val().frequency);
+  // append to table
+
+  // add calculation variables to 'next' and 'till', then append
 
 });
