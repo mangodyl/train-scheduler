@@ -11,11 +11,8 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function (snapshot) {
 
-  console.log(snapshot);
-
-});
+// On click: stores new values in firebase & clears form
 
 $(document).on("click", '#submit', function (event) {
   
@@ -47,5 +44,14 @@ $(document).on("click", '#submit', function (event) {
   $("#new-time").val("");
   $("#new-freq").val("");
 
+
+});
+
+
+// On addition of new value or page load, add new train to table via element creation & firebase read
+
+database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function (snapshot) {
+
+  console.log(snapshot);
 
 });
