@@ -47,9 +47,6 @@ $(document).on("click", '#submit', function (event) {
 
 });
 
-// Calculations go here
-
-// ------------------------------------
 
 // On addition of new value or page load, add new train to table via element creation & firebase read
 
@@ -65,13 +62,37 @@ database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", functi
   var till = $("<p>");
 
   train.text(snapshot.val().trainName);
-  // append to table
+  $("#train").append(train);
 
   dest.text(snapshot.val().destination);
-  // append to table
+  $("#dest").append(dest);
 
   freq.text(snapshot.val().frequency);
-  // append to table
+  $("#freq").append(freq);
+
+  // Time calculations
+
+  var tFreq = snapshot.val().frequency;
+
+  var firstTime = snapshot.val().time;
+  var momTime = moment(firstTime, 'hh:mm').subtract(1, "years");
+  var currentTime = moment();
+
+  console.log(momTime);
+
+  var timeDiff = currentTime.diff(moment(momTime), "minutes");
+  var moduloTime = timeDiff % tFreq;
+
+  var minsTill = tFreq - moduloTime;
+  console.log("mins till train: " + minsTill);
+  var nextArrival = currentTime.add(minsTill, "minutes");
+  console.log("arrival time: " + moment(nextArrival).format('hh:mm'));
+
+  next.text(moment(nextArrival).format('HH:MM'));
+  till.text(minsTill);
+
+  $("#next").append(next);
+  $("#min").append(till);
 
   // add calculation variables to 'next' and 'till', then append
 
