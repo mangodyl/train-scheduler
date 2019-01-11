@@ -75,20 +75,26 @@ database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", functi
   var tFreq = snapshot.val().frequency;
 
   var firstTime = snapshot.val().time;
-  var momTime = moment(firstTime, 'hh:mm').subtract(1, "years");
+  var momTime = moment(firstTime, 'HH:mm').subtract(1, "years");
   var currentTime = moment();
 
+  // var currentTimeConv = moment(currentTime, 'HH:MM');
+
+
   console.log(momTime);
+  console.log(currentTime);
 
   var timeDiff = currentTime.diff(moment(momTime), "minutes");
   var moduloTime = timeDiff % tFreq;
 
+  console.log(timeDiff);
+
   var minsTill = tFreq - moduloTime;
   console.log("mins till train: " + minsTill);
   var nextArrival = currentTime.add(minsTill, "minutes");
-  console.log("arrival time: " + moment(nextArrival).format('hh:mm'));
+  console.log("arrival time: " + moment(nextArrival).format('HH:mm'));
 
-  next.text(moment(nextArrival).format('HH:MM'));
+  next.text(moment(nextArrival).format('HH:mm'));
   till.text(minsTill);
 
   $("#next").append(next);
