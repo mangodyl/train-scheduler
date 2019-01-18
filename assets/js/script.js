@@ -57,9 +57,15 @@ database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", functi
   var train = $("<p>");
   var dest = $("<p>");
   var freq = $("<p>");
+
+  train.attr('type', "text");
+  dest.attr('type', "text");
+  freq.attr('type', "number");
   
   var next = $("<p>");
   var till = $("<p>");
+
+  till.attr('type', "number");
 
   train.text(snapshot.val().trainName);
   $("#train").append(train);
