@@ -106,6 +106,10 @@ database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", functi
   $("#next").append(next);
   $("#min").append(till);
 
-  // add calculation variables to 'next' and 'till', then append
+  // Example train time calculations
+  var exFirstTime = "08:45";
+  var exFirstMom = moment(exFirstTime, 'HH:mm').subtract(1, "years");
+
+  
 
 });
