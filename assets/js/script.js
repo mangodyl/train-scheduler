@@ -11,6 +11,37 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+// Current time moment
+var currentTime = moment();
+
+// Function to add/remove all console logs. Just comment out console.log(messages).
+function logs(...messages) {
+
+  console.log(...messages);
+
+};
+
+$(document).ready(function() {
+
+// Example train time calculations
+var exFirstTime = "08:45";
+var exFirstMom = moment(exFirstTime, 'HH:mm').subtract(1, "years");
+
+var exTimeDiff = currentTime.diff(moment(exFirstMom), "minutes");
+var exModuloTime = exTimeDiff % 60;
+
+logs("exTimeDiff" + exTimeDiff);
+
+var exMinsTill = 60 - exModuloTime;
+logs("ex mins till: " + exMinsTill);
+var exNextArrival = currentTime.add(exMinsTill, "minutes");
+logs ("ex arrival time: " + moment(exNextArrival).format('HH:mm'));
+
+$("#ex-mins-away").text(exMinsTill);
+$("#ex-next-train").text(moment(exNextArrival).format('HH:mm'));
+  
+});
+
 
 // On click: stores new values in firebase & clears form
 
@@ -18,7 +49,7 @@ $(document).on("click", '#submit', function (event) {
   
   event.preventDefault();
 
-  console.log("ok");
+  logs("ok");
 
   var newTrain = $("#new-train").val().trim();
   var newDest = $("#new-dest").val().trim();
@@ -52,7 +83,7 @@ $(document).on("click", '#submit', function (event) {
 
 database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function (snapshot) {
 
-  console.log(snapshot);
+  logs(snapshot);
 
   var train = $("<p>");
   var dest = $("<p>");
@@ -82,34 +113,27 @@ database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", functi
 
   var firstTime = snapshot.val().time;
   var momTime = moment(firstTime, 'HH:mm').subtract(1, "years");
-  var currentTime = moment();
 
   // var currentTimeConv = moment(currentTime, 'HH:MM');
 
 
-  console.log(momTime);
-  console.log(currentTime);
+  logs(momTime);
+  logs(currentTime);
 
   var timeDiff = currentTime.diff(moment(momTime), "minutes");
   var moduloTime = timeDiff % tFreq;
 
-  console.log(timeDiff);
+  logs(timeDiff);
 
   var minsTill = tFreq - moduloTime;
-  console.log("mins till train: " + minsTill);
+  logs("mins till train: " + minsTill);
   var nextArrival = currentTime.add(minsTill, "minutes");
-  console.log("arrival time: " + moment(nextArrival).format('HH:mm'));
+  logs("arrival time: " + moment(nextArrival).format('HH:mm'));
 
   next.text(moment(nextArrival).format('HH:mm'));
   till.text(minsTill);
 
   $("#next").append(next);
   $("#min").append(till);
-
-  // Example train time calculations
-  var exFirstTime = "08:45";
-  var exFirstMom = moment(exFirstTime, 'HH:mm').subtract(1, "years");
-
-  
 
 });
