@@ -12,7 +12,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 // Current time moment
-var currentTime = moment();
+
 
 // Function to add/remove all console logs. Just comment out console.log(messages).
 function logs(...messages) {
@@ -27,14 +27,16 @@ $(document).ready(function() {
 var exFirstTime = "08:45";
 var exFirstMom = moment(exFirstTime, 'HH:mm').subtract(1, "years");
 
-var exTimeDiff = currentTime.diff(moment(exFirstMom), "minutes");
+var exCurrentTime = moment();
+
+var exTimeDiff = exCurrentTime.diff(moment(exFirstMom), "minutes");
 var exModuloTime = exTimeDiff % 60;
 
 logs("exTimeDiff" + exTimeDiff);
 
 var exMinsTill = 60 - exModuloTime;
 logs("ex mins till: " + exMinsTill);
-var exNextArrival = currentTime.add(exMinsTill, "minutes");
+var exNextArrival = exCurrentTime.add(exMinsTill, "minutes");
 logs ("ex arrival time: " + moment(exNextArrival).format('HH:mm'));
 
 $("#ex-mins-away").text(exMinsTill);
@@ -81,7 +83,7 @@ $(document).on("click", '#submit', function (event) {
 
 // On addition of new value or page load, add new train to table via element creation & firebase read
 
-database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function (snapshot) {
+database.ref().orderByChild("dateAdded").limitToLast(10).on("child_added", function (snapshot) {
 
   logs(snapshot);
 
@@ -95,8 +97,6 @@ database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", functi
   
   var next = $("<p>");
   var till = $("<p>");
-
-  till.attr('type', "number");
 
   train.text(snapshot.val().trainName);
   $("#train").append(train);
@@ -113,6 +113,7 @@ database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", functi
 
   var firstTime = snapshot.val().time;
   var momTime = moment(firstTime, 'HH:mm').subtract(1, "years");
+  var currentTime = moment();
 
   // var currentTimeConv = moment(currentTime, 'HH:MM');
 
